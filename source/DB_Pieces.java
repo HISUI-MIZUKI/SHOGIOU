@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 将棋の各駒のマスターデータを一元定義・管理するデータベースクラス。
- * 駒のID、画像がない場合の代替漢字、画像ファイルへのパスを紐づけます。
+ * 成駒のデータも含めて登録し、画面上に正しく表示されるようにします。
  */
 public class DB_Pieces {
     
@@ -28,9 +28,7 @@ public class DB_Pieces {
     private static final Map<String, PieceData> registry = new HashMap<>();
 
     static {
-        // 【マスタデータ登録】
-        // 今後画像アセットを追加する場合は、第3引数のパスに実際のファイルを配置します。
-        // ファイルが見つからない間は、自動的に第2引数の漢字が盤面に適用されます。
+        // 【基本の駒マスタデータ】
         registry.put("OU", new PieceData("OU", "王", "/assets/ou.png"));
         registry.put("HI", new PieceData("HI", "飛", "/assets/hi.png"));
         registry.put("KA", new PieceData("KA", "角", "/assets/ka.png"));
@@ -39,11 +37,20 @@ public class DB_Pieces {
         registry.put("KE", new PieceData("KE", "桂", "/assets/ke.png"));
         registry.put("KY", new PieceData("KY", "香", "/assets/ky.png"));
         registry.put("FU", new PieceData("FU", "歩", "/assets/fu.png"));
+
+        // ★【追加】成駒のマスタデータ
+        // これらが登録されていないと、Board側で成った瞬間に画面上で表示できなくなります
+        registry.put("TO", new PieceData("TO", "と", "/assets/to.png"));  // と金
+        registry.put("NY", new PieceData("NY", "杏", "/assets/ny.png"));  // 成香
+        registry.put("NK", new PieceData("NK", "圭", "/assets/nk.png"));  // 成桂
+        registry.put("NG", new PieceData("NG", "全", "/assets/ng.png"));  // 成銀
+        registry.put("RY", new PieceData("RY", "龍", "/assets/ry.png"));  // 龍王
+        registry.put("UM", new PieceData("UM", "馬", "/assets/um.png"));  // 龍馬
     }
 
     /**
      * 駒のIDからマスターデータを取得します。
-     * @param key 駒ID ("OU", "HI" など)
+     * @param key 駒ID ("OU", "HI", "TO" など)
      * @return 該当するPieceDataオブジェクト。存在しない場合はnull。
      */
     public static PieceData get(String key) {
