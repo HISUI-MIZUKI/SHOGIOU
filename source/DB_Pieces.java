@@ -38,8 +38,7 @@ public class DB_Pieces {
         registry.put("KY", new PieceData("KY", "香", "/assets/ky.png"));
         registry.put("FU", new PieceData("FU", "歩", "/assets/fu.png"));
 
-        // ★【追加】成駒のマスタデータ
-        // これらが登録されていないと、Board側で成った瞬間に画面上で表示できなくなります
+        // 【成駒のマスタデータ】
         registry.put("TO", new PieceData("TO", "と", "/assets/to.png"));  // と金
         registry.put("NY", new PieceData("NY", "杏", "/assets/ny.png"));  // 成香
         registry.put("NK", new PieceData("NK", "圭", "/assets/nk.png"));  // 成桂
